@@ -1,4 +1,6 @@
-# unity-vertex-effects
+# uGUIのTextに綺麗な輪郭線や影を付ける
+## unity-vertex-effects
+----
 * UI.Outlineの改良版です。Qiitaのアドベントカレンダーの記事にするつもりでしたが、間に合わなかったのでソースだけ公開します。括弧内は通常の描画に対して頂点数が何倍に増えたかを表します。
 * 以下の画像は
   1. Outlineは、uGUIに含まれているもので、太いOutlineを綺麗に描画出来ません。
