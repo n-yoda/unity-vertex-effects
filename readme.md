@@ -1,7 +1,8 @@
 # Unity UIの文字に綺麗な輪郭線と影を付ける
 ### Text Outline and Shadow Effects for Unity UI (uGUI)
 
-#### unity-vertex-effects
+## Keywords
+Unity uGUI 文字 Text 縁取り 輪郭 Outline 影 Shadow
 
 ## 概要
 * UI.Outlineの改良版です。Qiitaのアドベントカレンダーの記事にするつもりでしたが、間に合わなかったのでソースだけ公開します。括弧内は通常の描画に対して頂点数が何倍に増えたかを表します。
