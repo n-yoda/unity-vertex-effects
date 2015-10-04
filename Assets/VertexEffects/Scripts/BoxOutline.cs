@@ -41,21 +41,7 @@ public class BoxOutline : ModifiedShadow
         }
     }
 
-    public override void ModifyMesh(VertexHelper vh)
-    {
-        if (!this.IsActive())
-            return;
-
-        List<UIVertex> list = new List<UIVertex>();
-        vh.GetUIVertexStream(list);
-
-        ModifyVertices(list);
-
-        vh.Clear();
-        vh.AddUIVertexTriangleStream(list);
-    }
-
-    public void ModifyVertices(List<UIVertex> verts)
+    public override void ModifyVertices(List<UIVertex> verts)
     {
         if (!IsActive())
             return;

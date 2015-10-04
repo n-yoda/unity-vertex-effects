@@ -3,7 +3,9 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 
 /// <summary>
-/// Capacityの計算がおかしいので、修正されるまではこれを使う。
+/// The behaviour of this class is almost the same as the original except:
+/// 1. It absorbs version differences.
+/// 2. It corrects the calculation of vertex list capacity.
 /// </summary>
 public class ModifiedShadow : Shadow
 {
@@ -11,6 +13,7 @@ public class ModifiedShadow : Shadow
     {
         UIVertex vt;
 
+        // The capacity calculation of the original version seems wrong.
         var neededCpacity = verts.Count + (end - start);
         if (verts.Capacity < neededCpacity)
             verts.Capacity = neededCpacity;
@@ -31,4 +34,44 @@ public class ModifiedShadow : Shadow
             verts[i] = vt;
         }
     }
+
+#if UNITY_5_2 && !UNITY_5_2_1pX
+    public override void ModifyMesh(Mesh mesh)
+    {
+        if (!this.IsActive())
+            return;
+
+        using (var vh = new VertexHelper(mesh))
+        {
+            ModifyMesh(vh);
+            vh.FillMesh(mesh);
+        }
+    }
+#endif
+
+#if !(UNITY_4_6 || UNITY_5_0 || UNITY_5_1)
+#if UNITY_5_2_1pX
+    public override void ModifyMesh(VertexHelper vh)
+#else
+    public void ModifyMesh(VertexHelper vh)
+#endif
+    {
+        if (!this.IsActive())
+            return;
+        
+        List<UIVertex> list = new List<UIVertex>();
+        vh.GetUIVertexStream(list);
+        
+        ModifyVertices(list);
+
+#if UNITY_5_2_1pX
+        vh.Clear();
+#endif
+        vh.AddUIVertexTriangleStream(list);
+    }
+
+    public virtual void ModifyVertices(List<UIVertex> verts)
+    {
+    }
+#endif
 }
