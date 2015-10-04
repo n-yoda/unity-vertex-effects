@@ -1,4 +1,4 @@
-# Beautiful Outline Effects for Unity UI Texts
+# Beautiful Text Outline for Unity UI
 ### Unity UIのTextに綺麗な輪郭線を付ける
 
 This repository contains improved versions of the [Outline](http://docs.unity3d.com/Manual/script-Outline.html) effect. They can render **thick** text outline beautifully. They can be also used as soft (blurred) shadow effects.
@@ -22,8 +22,6 @@ It renders text meshes at **(2X+1)*(2Y+1)-1 positions on a grid** whose center i
 This can express **outline thickness** correctly.
 It renders text meshes at **(N+K)+(N+2K)+... positions**.
 Each **N+iK** positions are on a circle whose radius is **i** and center is same as the main text mesh.
-
-は、半径1の円上にN個、半径2の円上にN+K個、半径3の円上にN+2K個…、のようにずらして描画します。「線の太さ」を正しく表現することが出来ます。
 
 ## Drop shadow
 When the alpha of the outline color is small, the outlines look like soft shadow:
