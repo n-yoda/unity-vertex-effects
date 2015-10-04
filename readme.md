@@ -10,7 +10,7 @@ Unity uGUI Text Outline Shadow 文字 縁取り 輪郭 影
 ![Outline](Assets/VertexEffectsExamples/ScreenShots/Outline.png)
 ### Outline
 The builtin outline effect. It cannot render thick outlines correctly.
-It renders colored text meshes at **4 slightly shfted positions (up, down, left and right)** from the main text mesh.
+It renders colored text meshes at **4 slightly shfted positions (up-left, up-right, down-left and down-right)** from the main text mesh.
 ### Outline8
 A slightly improved version of **Outline**.
 It renders text meshes at **8 positions (up, down, left, right, up-left, up-right, and so on)**.
