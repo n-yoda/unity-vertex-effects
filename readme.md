@@ -1,26 +1,39 @@
-# Unity UIの文字に綺麗な輪郭線と影を付ける
-### Text Outline and Shadow Effects for Unity UI (uGUI)
+# Beautiful Outline Effects for Unity UI Texts
+### Unity UIのTextに綺麗な輪郭線を付ける
+
+This repository contains improved versions of the [Outline](http://docs.unity3d.com/Manual/script-Outline.html) effect. They can render **thick** text outline beautifully. They can be also used as soft (blurred) shadow effects.
 
 ## Keywords
-Unity uGUI 文字 Text 縁取り 輪郭 Outline 影 Shadow
+Unity uGUI Text Outline Shadow 文字 縁取り 輪郭 影 
 
-## 概要
-* UI.Outlineの改良版です。Qiitaのアドベントカレンダーの記事にするつもりでしたが、間に合わなかったのでソースだけ公開します。括弧内は通常の描画に対して頂点数が何倍に増えたかを表します。
-* 以下の画像は
-  1. Outlineは、uGUIに含まれているもので、太いOutlineを綺麗に描画出来ません。
-  2. Outline8は、Outlineを改良したもので、上下左右の他に、斜め方向にもずらして描画しています。NGUIのUILabelをこのように拡張する人が多いためか、NGUIには最近導入されました。
-  3. BoxOutlineは、格子状にずらしながら描画することでどんな太さの境界線も綺麗に描画出来ます、が頂点数がとても増えます。
-  4. CircleOutlineは、半径1の円上にN個、半径2の円上にN+K個、半径3の円上にN+2K個…、のようにずらして描画します。「線の太さ」を正しく表現することが出来ます。
-* BoxOutlineに関しては、シーン読み込み時にShaderとRenderTextureで効率よく描画しておく方法が考えられます。縦方向にNピクセル膨張したあと横方向にNピクセル膨張させると、結果的に上のBoxOutlineと同じ効果が得られるためです。
-
-
-
+## Comparison
 ![Outline](Assets/VertexEffectsExamples/ScreenShots/Outline.png)
+### Outline
+The builtin outline effect. It cannot render thick outlines correctly.
+It renders colored text meshes at **4 slightly shfted positions (up, down, left and right)** from the main text mesh.
+### Outline8
+A slightly improved version of **Outline**.
+It renders text meshes at **8 positions (up, down, left, right, up-left, up-right, and so on)**.
+It is equivalent to *BoxOutline* of (X,Y)=(1,1).
+### BoxOutline
+Generalized version of **Outline8**.
+It renders text meshes at **(2X+1)*(2Y+1)-1 positions on a grid** whose center is same as the main text mesh.
+### CircleOutline
+This can express **outline thickness** correctly.
+It renders text meshes at **(N+K)+(N+2K)+... positions**.
+Each **N+iK** positions are on a circle whose radius is **i** and center is same as the main text mesh.
 
-* Alphaを小さくするとドロップシャドウのような効果も得られます。
+は、半径1の円上にN個、半径2の円上にN+K個、半径3の円上にN+2K個…、のようにずらして描画します。「線の太さ」を正しく表現することが出来ます。
 
+## Drop shadow
+When the alpha of the outline color is small, the outlines look like soft shadow:
 ![DropShadow](Assets/VertexEffectsExamples/ScreenShots/DropShadow.png)
 
-## ModifiedShadow.cs
-Unity UI の Shadow.cs の Capacity の計算がおかしい気がするので、Shadow の代わりにこれを継承しています。
+## Unity versions
+The APIs for modifying UI meshes are different among versions:
+* 5.5-5.1: *IVertexModifier.ModifyVertices(List<UIVertex>)*
+* 5.2-5.2.1: *IMeshModifier.ModifyMesh(Mesh)*
+* 5.2.1p1-: *IMeshModifier.ModifyMesh(VertexHelper)*
 
+In this project, *ModifiedShadow* absorbs these differences.
+When you use our scripts in Unity 5.2.1pX, please define **UNITY_5_2_1pX** at *Scripting Define Symbols* in *Player Settings*.
