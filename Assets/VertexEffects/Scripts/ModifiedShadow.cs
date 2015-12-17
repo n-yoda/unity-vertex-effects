@@ -50,7 +50,7 @@ public class ModifiedShadow : Shadow
 #endif
 
 #if !(UNITY_4_6 || UNITY_5_0 || UNITY_5_1)
-#if UNITY_5_2_1pX
+#if UNITY_5_2_1pX || UNITY_5_3
     public override void ModifyMesh(VertexHelper vh)
 #else
     public void ModifyMesh(VertexHelper vh)
@@ -64,7 +64,7 @@ public class ModifiedShadow : Shadow
         
         ModifyVertices(list);
 
-#if UNITY_5_2_1pX
+#if UNITY_5_2_1pX || UNITY_5_3
         vh.Clear();
 #endif
         vh.AddUIVertexTriangleStream(list);
