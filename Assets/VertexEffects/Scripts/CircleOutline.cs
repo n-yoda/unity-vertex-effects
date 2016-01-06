@@ -11,6 +11,7 @@ public class CircleOutline : ModifiedShadow
     [SerializeField]
     int m_sampleIncrement = 2;
 
+#if UNITY_EDITOR
     protected override void OnValidate()
     {
         base.OnValidate();
@@ -18,6 +19,7 @@ public class CircleOutline : ModifiedShadow
         firstSample = m_firstSample;
         sampleIncrement = m_sampleIncrement;
     }
+#endif
 
     public int circleCount
     {
