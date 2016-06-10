@@ -59,7 +59,7 @@ public class ModifiedShadow : Shadow
         if (!this.IsActive())
             return;
         
-        List<UIVertex> list = new List<UIVertex>();
+		var list = ListPool<UIVertex>.Get();
         vh.GetUIVertexStream(list);
         
         ModifyVertices(list);
@@ -68,6 +68,7 @@ public class ModifiedShadow : Shadow
         vh.Clear();
 #endif
         vh.AddUIVertexTriangleStream(list);
+		ListPool<UIVertex>.Release(list);
     }
 
     public virtual void ModifyVertices(List<UIVertex> verts)

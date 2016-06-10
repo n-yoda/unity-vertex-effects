@@ -46,7 +46,10 @@ public class BoxOutline : ModifiedShadow
         if (!IsActive())
             return;
 
-        verts.Capacity = verts.Count * (m_halfSampleCountX * 2 + 1) * (m_halfSampleCountY * 2 + 1);
+		var neededCapacity = verts.Count * (m_halfSampleCountX * 2 + 1) * (m_halfSampleCountY * 2 + 1);
+	    if (verts.Capacity < neededCapacity)
+        	verts.Capacity = neededCapacity;
+
         var original = verts.Count;
         var count = 0;
         var dx = effectDistance.x / m_halfSampleCountX;
@@ -58,7 +61,7 @@ public class BoxOutline : ModifiedShadow
                 if (!(x == 0 && y == 0))
                 {
                     var next = count + original;
-                    ApplyShadow(verts, effectColor, count, next, dx * x, dy * y);
+                    ApplyShadowZeroAlloc(verts, effectColor, count, next, dx * x, dy * y);
                     count = next;
                 }
             }
