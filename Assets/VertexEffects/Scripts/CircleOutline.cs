@@ -72,9 +72,9 @@ public class CircleOutline : ModifiedShadow
             return;
 
         var total = (m_firstSample * 2 + m_sampleIncrement * (m_circleCount - 1)) * m_circleCount / 2;
-		var neededCapacity = verts.Count * (total + 1);
-	    if (verts.Capacity < neededCapacity)
-        	verts.Capacity = neededCapacity;
+        var neededCapacity = verts.Count * (total + 1);
+        if (verts.Capacity < neededCapacity)
+            verts.Capacity = neededCapacity;
         var original = verts.Count;
         var count = 0;
         var sampleCount = m_firstSample;
