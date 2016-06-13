@@ -89,7 +89,11 @@ public class CircleOutline : ModifiedShadow
             for (int j = 0; j < sampleCount; j++)
             {
                 var next = count + original;
+#if UNITY_5_1 || UNITY_5_2 || UNITY_5_3
+                ApplyShadow(verts, effectColor, count, next, rx * Mathf.Cos(rad), ry * Mathf.Sin(rad));
+#else
                 ApplyShadowZeroAlloc(verts, effectColor, count, next, rx * Mathf.Cos(rad), ry * Mathf.Sin(rad));
+#endif
                 count = next;
                 rad += radStep;
             }
