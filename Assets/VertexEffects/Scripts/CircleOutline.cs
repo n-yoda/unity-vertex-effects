@@ -72,7 +72,9 @@ public class CircleOutline : ModifiedShadow
             return;
 
         var total = (m_firstSample * 2 + m_sampleIncrement * (m_circleCount - 1)) * m_circleCount / 2;
-        verts.Capacity = verts.Count * (total + 1);
+        var neededCapacity = verts.Count * (total + 1);
+        if (verts.Capacity < neededCapacity)
+            verts.Capacity = neededCapacity;
         var original = verts.Count;
         var count = 0;
         var sampleCount = m_firstSample;
@@ -87,7 +89,11 @@ public class CircleOutline : ModifiedShadow
             for (int j = 0; j < sampleCount; j++)
             {
                 var next = count + original;
+#if UNITY_5_1 || UNITY_5_2 || UNITY_5_3
                 ApplyShadow(verts, effectColor, count, next, rx * Mathf.Cos(rad), ry * Mathf.Sin(rad));
+#else
+                ApplyShadowZeroAlloc(verts, effectColor, count, next, rx * Mathf.Cos(rad), ry * Mathf.Sin(rad));
+#endif
                 count = next;
                 rad += radStep;
             }
