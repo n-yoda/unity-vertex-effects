@@ -61,7 +61,7 @@ public class BoxOutline : ModifiedShadow
                 if (!(x == 0 && y == 0))
                 {
                     var next = count + original;
-                    ApplyShadowZeroAlloc(verts, effectColor, count, next, dx * x, dy * y);
+                    ApplyShadow(verts, effectColor, count, next, dx * x, dy * y);
                     count = next;
                 }
             }

@@ -22,7 +22,7 @@ public class Outline8 : ModifiedShadow
                 if (!(x == 0 && y == 0))
                 {
                     var next = count + original;
-                    ApplyShadowZeroAlloc(verts, effectColor, count, next, effectDistance.x * x, effectDistance.y * y);
+                    ApplyShadow(verts, effectColor, count, next, effectDistance.x * x, effectDistance.y * y);
                     count = next;
                 }
             }
