@@ -7,6 +7,8 @@ This repository contains improved versions of the [Outline](http://docs.unity3d.
 Unity uGUI Text Outline Shadow 文字 縁取り 輪郭 影 
 
 ## Comparison
+__CAUTION__: Parenthesized numbers are rendering costs relative to text without outline.
+Take care where to use!
 ![Outline](Assets/VertexEffectsExamples/ScreenShots/Outline.png)
 ### Outline
 The builtin outline effect. It cannot render thick outlines correctly.
