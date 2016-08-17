@@ -29,6 +29,12 @@ Each **N+iK** positions are on a circle whose radius is **i** and center is same
 When the alpha of the outline color is small, the outlines look like soft shadow:
 ![DropShadow](Assets/VertexEffectsExamples/ScreenShots/DropShadow.png)
 
+## Performance
+Not good, as you can imagine. I recommend the following assets and techniques.
+* [Text Mesh Pro](https://www.assetstore.unity3d.com/jp/#!/content/17662)
+* [Improved Alpha-Tested Magnification for Vector Textures](http://www.valvesoftware.com/publications/2007/SIGGRAPH2007_AlphaTestedMagnification.pdf)
+* [Resolution Independent Curve Rendering using Programmable Graphics Hardware](http://research.microsoft.com/en-us/um/people/cloop/LoopBlinn05.pdf)
+
 ## Unity versions
 The APIs for modifying UI meshes are different among versions:
 * 5.5-5.1: *IVertexModifier.ModifyVertices(List<UIVertex>)*
